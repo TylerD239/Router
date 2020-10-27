@@ -3,7 +3,7 @@ const proxy = require('http-proxy').createProxyServer({})
 
 app.use('/', (req, res) => {
     const hostname = req.hostname
-    console.log(hostname)
+    console.log("host: ", hostname)
     switch (hostname) {
         case 'belenkaya.website':
             proxy.web(req, res, {
