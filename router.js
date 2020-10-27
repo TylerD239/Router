@@ -2,21 +2,25 @@ const app = require('express')()
 const proxy = require('http-proxy').createProxyServer({})
 
 app.use('/', (req, res) => {
-    console.log(req.hostname)
-    // switch (path) {
-    //     case '/chess':
-    //         proxy.web(req, res, {
-    //             target: 'http://localhost:5000'
-    //         })
-    //         break
-    //     case '/mail':
-    //         proxy.web(req, res, {
-    //             target: 'http://localhost:80'
-    //         })
-    //         break
-    //     default: res.send('123')
-    //
-    // }
+    const hostname = req.hostname
+    console.log(hostname)
+    switch (hostname) {
+        case 'belenkaya.website':
+            proxy.web(req, res, {
+                target: 'http://localhost:5000'
+            })
+            break
+        case 'http://play-chess.online/':
+            proxy.web(req, res, {
+                target: 'http://localhost:3000'
+            })
+            break
+        default:
+            proxy.web(req, res, {
+                target: 'http://localhost:3000'
+            })
+
+    }
 
 })
 
